@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+  margin:0;
+  background:black;
+  color:white;
+  font-family:sans-serif;
+  overflow:hidden;
+}
+
+/* SCREEN */
+.screen{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100vw;
+  height:100vh;
+  display:none;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  text-align:center;
+}
+
+.active{
+  display:flex;
+}
+
+/* LOGIN BOX FIX */
+#loginBox{
+  z-index:999;
+  position:relative;
+}
+
+/* INPUT FIX (IMPORTANT FOR MOBILE TOUCH) */
+input{
+  padding:14px;
+  width:70%;
+  font-size:16px;
+  border-radius:15px;
+  border:none;
+  outline:none;
+  pointer-events:auto;
+  touch-action:auto;
+}
+
+/* BUTTON */
+button{
+  padding:12px 22px;
+  margin-top:12px;
+  border:none;
+  border-radius:20px;
+  background:linear-gradient(45deg,#ff4d6d,#6cf);
+  color:white;
+}
+
+/* PROPOSAL */
+#proposal{
+  display:none;
+  position:fixed;
+  top:0;
+  left:0;
+  width:100vw;
+  height:100vh;
+  justify-content:center;
+  align-items:center;
+  background:black;
+}
+
+#proposal img{
+  width:90%;
+  max-height:90%;
+  object-fit:contain;
+}
+</style>
+</head>
+
+<body>
+
+<!-- LOGIN -->
+<div id="login" class="screen active">
+  <div id="loginBox">
+    <h2>🔐 Enter Password</h2>
+    <input id="pass" type="text" placeholder="Type password">
+    <br>
+    <button onclick="check()">Unlock</button>
+  </div>
+</div>
+
+<!-- NEXT SCREEN -->
+<div id="main" class="screen">
+  <h2>Birthday Mode 🎂</h2>
+  <button onclick="next()">Continue</button>
+</div>
+
+<!-- PROPOSAL -->
+<div id="proposal">
+  <img src="proposal-card.jpg">
+</div>
+
+<script>
+
+/* SAFE SWITCH */
+function show(id){
+  document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+}
+
+/* PASSWORD FIXED */
+function check(){
+  let val=document.getElementById("pass").value.trim().toLowerCase();
+
+  if(val==="angry bird"){
+    show("main");
+  }else{
+    alert("Wrong password");
+  }
+}
+
+/* NEXT */
+function next(){
+  document.getElementById("main").style.display="none";
+  document.getElementById("proposal").style.display="flex";
+}
+
+</script>
+
+</body>
+</html>
